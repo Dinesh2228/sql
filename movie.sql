@@ -1,0 +1,16 @@
+create database movie;
+use movie;
+create table movies (movie_id int primary key,title varchar(30),release_year int,director_id int);
+create table directors (director_id int primary key,director_name varchar(30));
+create table genres (genres_id int primary key,genre_name varchar(30));
+create table movgenres (movie_id int,genre_id int);
+insert into movies values (99,'RRR',2023,1),(97,'the exorist',1973,122),(78,'alien',1979,13);
+insert into movies values (458,'the dark night',2008,11),(51,'the godfather',1972,2),(6,'kgf2',2023,3);
+insert into directors values (1,'rajmouli'),(122,'john boorman'),(78,'Dan OBannon');
+insert into genres values (1,'Action-Drama'),(2,'triller-horror');
+insert into movgenres values (1,1),(122,2),(78,2);
+insert into movgenres values (458,1),(51,1),(6,1);
+SELECT movies.title, directors.director_name FROM movies JOIN directors ON movies.director_id = directors.director_id;
+SELECT movies.title, movies.release_year, directors.director_name FROM movies LEFT JOIN directors ON movies.director_id = directors.director_id;
+SELECT directors.director_name, movies.title FROM directors LEFT JOIN movies ON directors.director_id = movies.director_id;
+SELECT movies.title, genres.genre_name FROM movies JOIN movgenres ON movies.movie_id = movgenres.movie_id JOIN genres ON movgenres.genre_id = genres.genres_id;
